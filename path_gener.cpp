@@ -1,10 +1,17 @@
 /**
  * Author: Yue Teng
  * Compile: g++ path_gener.cpp Vertex/Vertex.cpp -std=c++11 -o path_gener
- * Usage: path_gener < input.txt
  * 
  * Description: Find the shortest path between two nodes in an
- *              unweighted, undirected, graph.
+ *              unweighted, undirected, graph. The input is the 
+ *              output graph from constructor. The command to 
+ *              invoke an output of shortest path:
+ * 
+ *              s 2 4
+ * 
+ *              after which a shortest path will output, like
+ * 
+ *              2-0-4
  */
 
 #include <iostream>
@@ -14,9 +21,35 @@
 #include <queue>
 #include <algorithm>
 
-#include "Vertex/Vertex.h"
-
 using namespace std;
+
+// Vertex class
+class Vertex{
+ public:
+  // label
+  int label_;
+  //0 white, 1 grey, 2 black
+  int color_;
+  //distance
+  int distance_;
+  //pointer to predecessor
+  Vertex *parent_;
+
+  Vertex();
+};
+
+// Constructor for Vertex.
+// Initialization cannot be specified
+Vertex::Vertex() {
+  // label specifying no vertex
+  label_ = -1;
+  // white
+  color_ = 0;
+  // -1 means infinity
+  distance_ = -1;
+  // no predecessor
+  parent_ = NULL;
+}
 
 // generates a pointer to an adjacency
 // list which is a vector containing
